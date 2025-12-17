@@ -10,7 +10,7 @@ router.post("/submit", async (req, res) => {
     const data = await Registration.create(req.body);
     console.log("data",data)
     // 2️⃣ Send user email (NON-BLOCKING)
-    await sendMail(
+     sendMail(
       data.email,
       "Registration Successful - External Vision Academy",
       `<h2>Thank you ${data.name}</h2>
