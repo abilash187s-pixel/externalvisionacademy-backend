@@ -18,11 +18,11 @@ router.post("/submit", async (req, res) => {
     );
 
     // 3️⃣ Send admin email (NON-BLOCKING)
-    await sendMail(
-      process.env.ADMIN_EMAIL || "externalvisionacademy@gmail.com",
-      "New Registration Received",
-      `<pre>${JSON.stringify(data, null, 2)}</pre>`
-    );
+    // await sendMail(
+    //    "externalvisionacademy@gmail.com",
+    //   "New Registration Received",
+    //   `<pre>${JSON.stringify(data, null, 2)}</pre>`
+    // );
 
     // 4️⃣ Respond immediately
     res.json({ success: true });
