@@ -1,20 +1,20 @@
-
 import nodemailer from "nodemailer";
-console.log("EMAIL_USER:", process.env.EMAIL_USER);
-console.log("EMAIL_PASS EXISTS:", !!process.env.EMAIL_PASS);
+
 export const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp-relay.brevo.com",
+  port: 587,
+  secure: false,
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
+    user: process.env.EMAIL_USER, // Brevo login
+    pass: process.env.EMAIL_PASS, // Brevo SMTP key
+  },
 });
 
 export function sendMail(to, subject, html) {
   return transporter.sendMail({
-    from: `"External Vision Academy" <${process.env.EMAIL_USER}>`,
+    from: "External Vision Academy <no-reply@externalvisionacademy.com>",
     to,
     subject,
-    html
+    html,
   });
 }
