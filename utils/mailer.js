@@ -1,18 +1,10 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
-export const transporter = nodemailer.createTransport({
-  host: "smtp-relay.brevo.com",
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER, // externalvisionacademy@gmail.com
-    pass: process.env.EMAIL_PASS, // Brevo SMTP key
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-export function sendMail(to, subject, html) {
-  return transporter.sendMail({
-    from: `"External Vision Academy" <${process.env.EMAIL_USER}>`,
+export async function sendMail(to, subject, html) {
+  await resend.emails.send({
+    from: process.env.FROM_EMAIL,
     to,
     subject,
     html,
