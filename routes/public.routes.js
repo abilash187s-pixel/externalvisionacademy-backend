@@ -9,13 +9,13 @@ router.post("/submit", async (req, res) => {
   try {
     const data = await Registration.create(req.body);
 
-    await sendMail(
+     sendMail(
       data.email,
       "Registration Successful - External Vision Academy",
       `<h2>Thank you ${data.name}</h2><p>We received your registration.</p>`
     );
     
-    await sendMail(
+     sendMail(
       process.env.EMAIL_USER,
       "New Registration Received",
       `<pre>${JSON.stringify(data, null, 2)}</pre>`
