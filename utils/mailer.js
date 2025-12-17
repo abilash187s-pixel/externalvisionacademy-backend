@@ -5,14 +5,14 @@ export const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: process.env.EMAIL_USER, // Brevo login
+    user: process.env.EMAIL_USER, // externalvisionacademy@gmail.com
     pass: process.env.EMAIL_PASS, // Brevo SMTP key
   },
 });
 
 export function sendMail(to, subject, html) {
   return transporter.sendMail({
-    from: "External Vision Academy <no-reply@externalvisionacademy.com>",
+    from: `"External Vision Academy" <${process.env.EMAIL_USER}>`,
     to,
     subject,
     html,
