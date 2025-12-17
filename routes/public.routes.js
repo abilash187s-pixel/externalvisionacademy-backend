@@ -1,6 +1,7 @@
 import express from "express";
 import Registration from "../models/Registration.js";
 import { sendMail } from "../utils/mailer.js";
+import { sendRegistrationEmail } from "../utils/mailer.js";
 
 const router = express.Router();
 
