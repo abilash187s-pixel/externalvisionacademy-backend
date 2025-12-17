@@ -9,6 +9,7 @@ export function initMailer() {
 }
 
 export async function sendMail(to, subject, html) {
+  console.log('toemails',to)
   if (!resend) {
     // silently skip (no scary log)
     return;
