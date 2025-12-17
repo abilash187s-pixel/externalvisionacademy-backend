@@ -8,7 +8,7 @@ router.post("/submit", async (req, res) => {
   try {
     // 1️⃣ Save data
     const data = await Registration.create(req.body);
-
+    console.log("data",data)
     // 2️⃣ Send user email (NON-BLOCKING)
     sendMail(
       data.email,
