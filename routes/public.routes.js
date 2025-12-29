@@ -11,6 +11,7 @@ router.post("/submit", async (req, res) => {
     
     // 1️⃣ Save data to MongoDB
     const data = await Registration.create(req.body);
+    console.log('data',data)
     console.log("💾 Data saved:", { 
       name: data.name, 
       email: data.email,
