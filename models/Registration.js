@@ -8,5 +8,6 @@ export default mongoose.model("Registration", new mongoose.Schema({
   whatsapp: String,
   location: String,
   age: String,
+  preferredOption:String,
   receivedAt: { type: Date, default: Date.now }
 }));
