@@ -185,7 +185,7 @@ export async function sendRegistrationEmail(userData) {
     </html>
   `;
   
-  const adminSubject = `📋 New Registration: ${name} - ${course || 'General Inquiry'}`;
+  const adminSubject = `📋 New Registration: ${name} - ${preferredOption || 'General Inquiry'}`;
   const adminHtml = `
     <!DOCTYPE html>
     <html>
