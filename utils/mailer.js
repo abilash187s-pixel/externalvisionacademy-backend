@@ -108,7 +108,7 @@ export async function sendMail(to, subject, html, options = {}) {
 
 // Helper function to send registration emails
 export async function sendRegistrationEmail(userData) {
-  const { name, email, phone, course } = userData;
+  const { name, email, phone, preferredOption } = userData;
   
   const userSubject = "🎉 Registration Successful - External Vision Academy";
   const userHtml = `
