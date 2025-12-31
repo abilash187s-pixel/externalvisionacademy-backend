@@ -1,7 +1,6 @@
 import { Resend } from "resend";
 import fs from "fs";
 import { generateRegistrationPDF } from "./generateRegistrationPDF.js";
-
 let resend = null;
 
 export function initMailer() {
@@ -19,14 +18,14 @@ export function initMailer() {
 }
 
 export async function sendMail(to, subject, html, options = {}) {
-  const { retryCount = 0 } = options;
+    const { retryCount = 0, attachments = [] } = options;
+
   
   if (!resend) {
     console.log("⚠️ Resend not initialized. Skipping email to:", to);
     return { success: false, message: "Mailer not initialized" };
   }
-  const pdfPath = await generateRegistrationPDF(user);
-  const pdfBuffer = fs.readFileSync(pdfPath);
+  
   console.log(`📤 Attempting to send email to: ${to}`);
   console.log(`📝 Subject: ${subject}`);
   
@@ -56,12 +55,7 @@ export async function sendMail(to, subject, html, options = {}) {
       to: validRecipients,
       subject: subject,
       html: html,
-      attachments: [
-      {
-        filename: "Registration-Confirmation.pdf",
-        content: pdfBuffer.toString("base64"),
-      },
-    ],
+      attachments
     });
     
     if (error) {
@@ -109,6 +103,15 @@ export async function sendMail(to, subject, html, options = {}) {
 // Helper function to send registration emails
 export async function sendRegistrationEmail(userData) {
   const { name, email, phone, preferredOption } = userData;
+
+   const pdfPath = await generateRegistrationPDF(userData);
+  const pdfBuffer = fs.readFileSync(pdfPath);
+    const attachments = [
+    {
+      filename: "Registration-Confirmation.pdf",
+      content: pdfBuffer.toString("base64"),
+    },
+  ];
   
   const userSubject = "🎉 Registration Successful - External Vision Academy";
   const userHtml = `
@@ -241,7 +244,7 @@ ${JSON.stringify(userData, null, 2)}
   // Send admin email
   console.log(`📨 Sending alert to admin`);
   const adminResult = await sendMail(process.env.ADMIN_EMAIL || "externalvisionacademy@gmail.com", adminSubject, adminHtml);
-  
+  fs.unlinkSync(pdfPath); 
   return {
     userEmail: userResult,
     adminEmail: adminResult
