@@ -48,8 +48,8 @@ export async function sendMail(to, subject, html, options = {}) {
     
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: "External Vision Academy <externalvisionacademy@gmail.com>",
-
+      from: "External Vision Academy <no-reply@externalvisionacademy.com>",
+      replyTo: "externalvisionacademy@gmail.com",
       to: validRecipients,
       subject: subject,
       html: html,
