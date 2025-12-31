@@ -239,11 +239,12 @@ ${JSON.stringify(userData, null, 2)}
   
   // Send user email
   console.log(`📨 Sending confirmation to user: ${email}`);
-  const userResult = await sendMail(email, userSubject, userHtml);
+  const userResult = await sendMail(email, userSubject, userHtml,    { attachments });
   
   // Send admin email
   console.log(`📨 Sending alert to admin`);
-  const adminResult = await sendMail(process.env.ADMIN_EMAIL || "externalvisionacademy@gmail.com", adminSubject, adminHtml);
+  const adminResult = await sendMail(process.env.ADMIN_EMAIL || "externalvisionacademy@gmail.com", adminSubject, adminHtml,    { attachments }
+);
   fs.unlinkSync(pdfPath); 
   return {
     userEmail: userResult,
