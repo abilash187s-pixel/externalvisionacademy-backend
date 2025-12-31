@@ -1,4 +1,6 @@
 import { Resend } from "resend";
+import fs from "fs";
+import { generateRegistrationPDF } from "./generateRegistrationPDF";
 
 let resend = null;
 
@@ -53,6 +55,12 @@ export async function sendMail(to, subject, html, options = {}) {
       to: validRecipients,
       subject: subject,
       html: html,
+      attachments: [
+      {
+        filename: "Registration-Confirmation.pdf",
+        content: pdfBuffer.toString("base64"),
+      },
+    ],
     });
     
     if (error) {
