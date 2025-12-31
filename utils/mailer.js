@@ -137,7 +137,7 @@ export async function sendRegistrationEmail(userData) {
             </tr>
             <tr>
               <td style="padding: 8px 0; color: #666;"><strong>Selected Course:</strong></td>
-              <td style="padding: 8px 0;">${course || 'To be discussed'}</td>
+              <td style="padding: 8px 0;">${preferredOption || 'To be discussed'}</td>
             </tr>
             <tr>
               <td style="padding: 8px 0; color: #666;"><strong>Registration Date:</strong></td>
