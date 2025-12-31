@@ -7,6 +7,7 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import adminRoutes from "./routes/admin.routes.js";
 import publicRoutes from "./routes/public.routes.js";
+import chatRoutes from "./routes/chat.js";
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use(express.json());
 
 app.use("/api", publicRoutes);
 app.use("/admin", adminRoutes);
+app.use("/api/chat", chatRoutes);
 
 app.get("/", (req, res) => res.send("EVA Backend Running"));
 
