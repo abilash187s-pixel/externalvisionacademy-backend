@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 import fs from "fs";
-import { generateRegistrationPDF } from "./generateRegistrationPDF";
+import { generateRegistrationPDF } from "./generateRegistrationPDF.js";
 
 let resend = null;
 
@@ -25,7 +25,8 @@ export async function sendMail(to, subject, html, options = {}) {
     console.log("⚠️ Resend not initialized. Skipping email to:", to);
     return { success: false, message: "Mailer not initialized" };
   }
-  
+  const pdfPath = await generateRegistrationPDF(user);
+  const pdfBuffer = fs.readFileSync(pdfPath);
   console.log(`📤 Attempting to send email to: ${to}`);
   console.log(`📝 Subject: ${subject}`);
   
